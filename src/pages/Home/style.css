@@ -1,0 +1,7 @@
+@tailwind components;
+
+@layer components {
+  .home-container {
+    @apply h-screen w-full flex justify-center items-center;
+  }
+}

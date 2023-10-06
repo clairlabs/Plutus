@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    @apply w-1.5;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    @apply bg-neutral-900;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-neutral-600 rounded-full;
+    @apply active:bg-neutral-400;
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    @apply h-0 w-0;
+  }
+
+  .scrollbar-none::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .scrollbar-none::-webkit-scrollbar-thumb {
+    @apply bg-transparent;
+  }
+
+  .animate {
+    @apply transition-all ease-in-out;
+  }
+}
+
+@layer base {
+  html,
+  body {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    @apply bg-neutral-950 scrollbar scroll-smooth font-inter text-white;
+  }
+
+  div {
+    @apply scrollbar-none;
+  }
+
+  h1 {
+    @apply font-black text-xl leading-none;
+  }
+
+  h2 {
+    @apply font-bold text-lg leading-none;
+  }
+
+  h3 {
+    @apply font-medium text-base leading-none;
+  }
+
+  p {
+    @apply font-normal text-sm text-white/60 leading-none;
+  }
+
+  input {
+    @apply w-full px-6 py-4 bg-transparent outline-0 font-normal text-sm text-white;
+    @apply placeholder:text-white/60;
+    @apply focus:bg-neutral-900;
+    @apply disabled:bg-neutral-800;
+  }
+
+  button {
+    -webkit-tap-highlight-color: transparent;
+    @apply px-4 py-3 outline-0 font-semibold text-sm leading-none rounded-md;
+  }
+}
+
+@layer components {
+  .button-text {
+    @apply font-semibold text-sm leading-none text-inherit;
+  }
+
+  .button-default {
+    @apply p-0 rounded-none;
+  }
+
+  .button-primary {
+    @apply bg-orange-500 text-neutral-900;
+    @apply active:bg-orange-600;
+  }
+
+  .button-secondary {
+    @apply bg-neutral-900 text-white;
+    @apply active:bg-neutral-700;
+  }
+}
