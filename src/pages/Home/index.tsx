@@ -47,12 +47,13 @@ const Home: FC = () => {
 
   useEffect(() => {
     const abortController = new AbortController();
+    const timeoutId = setTimeout(() => getData(abortController), 5000);
 
     ReactGA.send({ hitType: "pageview", page: pathname, title: "Plutus" });
-    getData(abortController);
 
     return () => {
       abortController.abort();
+      clearTimeout(timeoutId);
     };
   }, [pathname]);
 
