@@ -1,9 +1,6 @@
 import "./style.css";
 import { FC, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import ReactGA from "react-ga4";
 
-const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID;
 const DIRECT_URLS = [
   "https://www.highcpmrevenuegate.com/z47f97hyy?key=708d644e71967e771463e71590d548cf",
   "https://www.highcpmrevenuegate.com/wzsnah8h?key=ed104250e30a952bb1be913ccd16d888",
@@ -12,11 +9,7 @@ const DIRECT_URLS = [
 ];
 const FALLBACK_URLS = ["https://caishencaishen.blogspot.com/p/worker10.html"];
 
-ReactGA.initialize(GA_MEASUREMENT_ID);
-
 const Home: FC = () => {
-  const { pathname } = useLocation();
-
   const getRandomItem = (array: string[]) => {
     const index = Math.floor(Math.random() * array.length);
 
@@ -36,12 +29,6 @@ const Home: FC = () => {
     const data = JSON.parse((await response.json()).contents);
     const targetUrl = getRandomItem(data.proxy ? FALLBACK_URLS : DIRECT_URLS);
 
-    ReactGA.event({
-      category: "Redirect",
-      action: data.proxy ? "Fallback" : "Direct",
-      label: targetUrl,
-    });
-
     window.location.href = targetUrl;
   };
 
@@ -49,13 +36,11 @@ const Home: FC = () => {
     const abortController = new AbortController();
     const timeoutId = setTimeout(() => getData(abortController), 5000);
 
-    ReactGA.send({ hitType: "pageview", page: pathname, title: "Plutus" });
-
     return () => {
       abortController.abort();
       clearTimeout(timeoutId);
     };
-  }, [pathname]);
+  }, []);
 
   return (
     <main className="home-container">
