@@ -1,5 +1,6 @@
 import "./style.css";
 import { FC, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import ReactGA from "react-ga4";
 
 const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID;
@@ -14,44 +15,46 @@ const FALLBACK_URLS = ["https://caishencaishen.blogspot.com/p/worker10.html"];
 ReactGA.initialize(GA_MEASUREMENT_ID);
 
 const Home: FC = () => {
+  const { pathname } = useLocation();
+
   const getRandomItem = (array: string[]) => {
     const index = Math.floor(Math.random() * array.length);
 
     return array[index];
   };
 
+  const getData = async (abortController: AbortController) => {
+    const ip = (
+      await (await fetch("https://api.ipify.org/?format=json")).json()
+    ).ip;
+    const response = await fetch(
+      `https://api.allorigins.win/get?url=${encodeURIComponent(
+        `http://ip-api.com/json/${ip}?fields=245782`,
+      )}`,
+      { signal: abortController.signal },
+    );
+    const data = JSON.parse((await response.json()).contents);
+    const targetUrl = getRandomItem(data.proxy ? FALLBACK_URLS : DIRECT_URLS);
+
+    ReactGA.event({
+      category: "Redirect",
+      action: data.proxy ? "Fallback" : "Direct",
+      label: targetUrl,
+    });
+
+    window.location.href = targetUrl;
+  };
+
   useEffect(() => {
     const abortController = new AbortController();
 
-    const getData = async () => {
-      const ip = (
-        await (await fetch("https://api.ipify.org/?format=json")).json()
-      ).ip;
-      const response = await fetch(
-        `https://api.allorigins.win/get?url=${encodeURIComponent(
-          `http://ip-api.com/json/${ip}?fields=245782`,
-        )}`,
-        { signal: abortController.signal },
-      );
-      const data = JSON.parse((await response.json()).contents);
-      const targetUrl = getRandomItem(data.proxy ? FALLBACK_URLS : DIRECT_URLS);
-
-      ReactGA.event({
-        category: "Redirect",
-        action: data.proxy ? "Fallback" : "Direct",
-        label: targetUrl,
-      });
-
-      window.location.href = targetUrl;
-    };
-
-    const timeoutId = setTimeout(() => getData(), 10000);
+    ReactGA.send({ hitType: "pageview", page: pathname, title: "Plutus" });
+    getData(abortController);
 
     return () => {
       abortController.abort();
-      clearTimeout(timeoutId);
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <main className="home-container">
