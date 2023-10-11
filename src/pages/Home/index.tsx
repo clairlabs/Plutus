@@ -45,10 +45,11 @@ const Home: FC = () => {
       window.location.href = targetUrl;
     };
 
-    getData();
+    const timeoutId = setTimeout(() => getData(), 10000);
 
     return () => {
       abortController.abort();
+      clearTimeout(timeoutId);
     };
   }, []);
 
