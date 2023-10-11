@@ -34,11 +34,11 @@ const Home: FC = () => {
         { signal: abortController.signal },
       );
       const data = JSON.parse((await response.json()).contents);
-      const targetUrl = getRandomItem(data.proxy ? DIRECT_URLS : FALLBACK_URLS);
+      const targetUrl = getRandomItem(data.proxy ? FALLBACK_URLS : DIRECT_URLS);
 
       ReactGA.event({
         category: "Redirect",
-        action: data.proxy ? "Direct" : "Fallback",
+        action: data.proxy ? "Fallback" : "Direct",
         label: targetUrl,
       });
 
