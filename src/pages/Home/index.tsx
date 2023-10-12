@@ -34,17 +34,23 @@ const Home: FC = () => {
 
   useEffect(() => {
     const abortController = new AbortController();
+    let timeoutId: number;
 
     if (data) {
-      const targetUrl = getRandomItem(data.proxy ? FALLBACK_URLS : DIRECT_URLS);
+      timeoutId = setTimeout(() => {
+        const targetUrl = getRandomItem(
+          data.proxy ? FALLBACK_URLS : DIRECT_URLS,
+        );
 
-      window.location.href = targetUrl;
+        window.location.href = targetUrl;
+      }, 5000);
     } else {
       getData(abortController);
     }
 
     return () => {
       abortController.abort();
+      clearTimeout(timeoutId);
     };
   }, [data]);
 
