@@ -10,6 +10,6 @@
   }
 
   .home-advertising-banner {
-    @apply h-[90px] w-[728px] aspect-video border border-neutral-900;
+    @apply h-[90px] w-[728px] border border-neutral-900;
   }
 }

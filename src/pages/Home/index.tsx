@@ -61,16 +61,16 @@ const Home: FC = () => {
         <div className="home-advertising">
           <iframe
             className="home-advertising-banner"
-            srcDoc={`<script type="text/javascript">
-	atOptions = {
-		'key' : 'bcb62fd856cce64431e3cbd5b97e2115',
-		'format' : 'iframe',
-		'height' : 90,
-		'width' : 728,
-		'params' : {}
-	};
-	document.write('<scr' + 'ipt type="text/javascript" src="//www.profitablecreativeformat.com/bcb62fd856cce64431e3cbd5b97e2115/invoke.js"></scr' + 'ipt>');
-</script>`}
+            srcDoc={`<html><body><script data-cfasync="false" type="text/javascript">
+            atOptions = {
+              'key' : 'bcb62fd856cce64431e3cbd5b97e2115',
+              'format' : 'iframe',
+              'height' : 90,
+              'width' : 728,
+              'params' : {}
+            };
+            document.write('<scr' + 'ipt data-cfasync="false" type="text/javascript" src="//www.profitablecreativeformat.com/bcb62fd856cce64431e3cbd5b97e2115/invoke.js"></scr' + 'ipt>');
+          </script></body></html>`}
           ></iframe>
           <p className="text-xs">Advertising</p>
         </div>
