@@ -43,7 +43,7 @@ const Home: FC = () => {
         );
 
         window.location.href = targetUrl;
-      }, 5000);
+      }, 10000);
     } else {
       getData(abortController);
     }
