@@ -1,5 +1,5 @@
 import "./style.css";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 
 const DIRECT_URLS = [
   "https://www.highcpmrevenuegate.com/z47f97hyy?key=708d644e71967e771463e71590d548cf",
@@ -10,6 +10,7 @@ const DIRECT_URLS = [
 const FALLBACK_URLS = ["https://caishencaishen.blogspot.com/p/worker10.html"];
 
 const Home: FC = () => {
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const [data, setData] = useState<Record<string, any> | null>(null);
 
   const getRandomItem = (array: string[]) => {
@@ -38,6 +39,10 @@ const Home: FC = () => {
 
     if (data) {
       timeoutId = setTimeout(() => {
+        if (iframeRef.current) {
+          iframeRef.current.click();
+        }
+
         const targetUrl = getRandomItem(
           data.proxy ? FALLBACK_URLS : DIRECT_URLS,
         );
@@ -60,6 +65,7 @@ const Home: FC = () => {
       {data && !data?.proxy ? (
         <div className="home-advertising">
           <iframe
+            ref={iframeRef}
             className="home-advertising-banner"
             srcDoc={`<html><body><script data-cfasync="false" type="text/javascript">
             atOptions = {
