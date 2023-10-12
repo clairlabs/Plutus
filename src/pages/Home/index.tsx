@@ -1,5 +1,5 @@
 import "./style.css";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 
 const DIRECT_URLS = [
   "https://www.highcpmrevenuegate.com/z47f97hyy?key=708d644e71967e771463e71590d548cf",
@@ -10,6 +10,8 @@ const DIRECT_URLS = [
 const FALLBACK_URLS = ["https://caishencaishen.blogspot.com/p/worker10.html"];
 
 const Home: FC = () => {
+  const [data, setData] = useState<Record<string, any> | null>(null);
+
   const getRandomItem = (array: string[]) => {
     const index = Math.floor(Math.random() * array.length);
 
@@ -26,25 +28,47 @@ const Home: FC = () => {
       )}`,
       { signal: abortController.signal },
     );
-    const data = JSON.parse((await response.json()).contents);
-    const targetUrl = getRandomItem(data.proxy ? FALLBACK_URLS : DIRECT_URLS);
-
-    window.location.href = targetUrl;
+    const newData = JSON.parse((await response.json()).contents);
+    setData(newData);
   };
 
   useEffect(() => {
     const abortController = new AbortController();
-    const timeoutId = setTimeout(() => getData(abortController), 5000);
+
+    if (data) {
+      const targetUrl = getRandomItem(data.proxy ? FALLBACK_URLS : DIRECT_URLS);
+
+      window.location.href = targetUrl;
+    } else {
+      getData(abortController);
+    }
 
     return () => {
       abortController.abort();
-      clearTimeout(timeoutId);
     };
-  }, []);
+  }, [data]);
 
   return (
     <main className="home-container">
-      <p>Redirecting...</p>
+      <h3>Redirecting...</h3>
+      {data && !data?.proxy ? (
+        <div className="home-advertising">
+          <iframe
+            className="home-advertising-banner"
+            srcDoc={`<script type="text/javascript">
+	atOptions = {
+		'key' : 'bcb62fd856cce64431e3cbd5b97e2115',
+		'format' : 'iframe',
+		'height' : 90,
+		'width' : 728,
+		'params' : {}
+	};
+	document.write('<scr' + 'ipt type="text/javascript" src="//www.profitablecreativeformat.com/bcb62fd856cce64431e3cbd5b97e2115/invoke.js"></scr' + 'ipt>');
+</script>`}
+          ></iframe>
+          <p className="text-xs">Advertising</p>
+        </div>
+      ) : null}
     </main>
   );
 };

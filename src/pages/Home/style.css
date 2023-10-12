@@ -2,6 +2,14 @@
 
 @layer components {
   .home-container {
-    @apply h-screen w-full flex justify-center items-center;
+    @apply h-screen w-full flex flex-col justify-center items-center space-y-6;
+  }
+
+  .home-advertising {
+    @apply flex flex-col items-center space-y-3;
+  }
+
+  .home-advertising-banner {
+    @apply h-[90px] w-[728px] aspect-video border border-neutral-900;
   }
 }
