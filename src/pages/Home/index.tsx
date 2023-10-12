@@ -1,6 +1,8 @@
 import "./style.css";
 import { FC, useEffect, useRef, useState } from "react";
 
+const BLACKLIST = ["us", "pk"];
+
 const DIRECT_URLS = [
   "https://www.highcpmrevenuegate.com/z47f97hyy?key=708d644e71967e771463e71590d548cf",
   "https://www.highcpmrevenuegate.com/wzsnah8h?key=ed104250e30a952bb1be913ccd16d888",
@@ -44,7 +46,9 @@ const Home: FC = () => {
         }
 
         const targetUrl = getRandomItem(
-          data.proxy ? FALLBACK_URLS : DIRECT_URLS,
+          !BLACKLIST.includes(data.countryCode.toLowerCase()) && data.proxy
+            ? FALLBACK_URLS
+            : DIRECT_URLS,
         );
 
         window.location.href = targetUrl;
