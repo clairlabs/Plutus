@@ -1,7 +1,7 @@
 import "./style.css";
 import { FC, useEffect, useRef, useState } from "react";
 
-const BLACKLIST = ["us", "pk"];
+const BLACKLIST = [""];
 
 const DIRECT_URLS = [
   "https://www.highcpmrevenuegate.com/z47f97hyy?key=708d644e71967e771463e71590d548cf",
