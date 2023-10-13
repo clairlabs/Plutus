@@ -1,0 +1,27 @@
+@tailwind components;
+
+@layer components {
+  .dashboard-container {
+    @apply h-screen w-full p-6 flex flex-col space-y-6;
+  }
+
+  .dashboard-header {
+    @apply w-full flex justify-between items-center;
+  }
+
+  .dashboard-tabs {
+    @apply flex border-b border-neutral-900;
+  }
+
+  .dashboard-tab {
+    @apply border-b border-transparent;
+  }
+
+  .dashboard-tab-active {
+    @apply border-white;
+  }
+
+  .dashboard-content {
+    @apply w-full;
+  }
+}
