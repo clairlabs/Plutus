@@ -1,18 +1,17 @@
 import "./style.css";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 const BLACKLIST = [""];
-
-const DIRECT_URLS = [
-  "https://www.highcpmrevenuegate.com/z47f97hyy?key=708d644e71967e771463e71590d548cf",
-  "https://www.highcpmrevenuegate.com/wzsnah8h?key=ed104250e30a952bb1be913ccd16d888",
-  "https://ookroush.com/4/6424063",
-  "https://dubzenom.com/4/6424064",
+const DIRECT_LINKS = [
+  [
+    "https://www.highcpmrevenuegate.com/z47f97hyy?key=708d644e71967e771463e71590d548cf",
+    "https://www.highcpmrevenuegate.com/wzsnah8h?key=ed104250e30a952bb1be913ccd16d888",
+  ],
+  ["https://ookroush.com/4/6424063", "https://dubzenom.com/4/6424064"],
 ];
-const FALLBACK_URLS = ["https://caishencaishen.blogspot.com/p/worker10.html"];
+const FALLBACK_LINKS = ["https://caishencaishen.blogspot.com/p/worker10.html"];
 
 const Home: FC = () => {
-  const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const [data, setData] = useState<Record<string, any> | null>(null);
 
   const getRandomItem = (array: string[]) => {
@@ -41,21 +40,16 @@ const Home: FC = () => {
 
     if (data) {
       timeoutId = setTimeout(() => {
-        if (iframeRef.current) {
-          iframeRef.current.click();
-        }
-
-        const targetUrl = getRandomItem(
-          !BLACKLIST.includes(data.countryCode.toLowerCase()) && data.proxy
-            ? FALLBACK_URLS
-            : DIRECT_URLS,
+        const isEligible = !(
+          BLACKLIST.includes(data.countryCode.toLowerCase()) || data.proxy
         );
+        const nonce = new Date().getMinutes() % 2;
+        const popupUrl = getRandomItem(DIRECT_LINKS[nonce]);
+        const redirectUrl = getRandomItem(DIRECT_LINKS[nonce]);
+        const fallbackUrl = getRandomItem(FALLBACK_LINKS);
 
-        window.open(
-          "https://caishencaishen.blogspot.com/p/worker9.html",
-          "_blank",
-        );
-        window.location.href = targetUrl;
+        window.open(isEligible ? popupUrl : fallbackUrl, "_blank");
+        window.location.href = isEligible ? redirectUrl : fallbackUrl;
       }, 10000);
     } else {
       getData(abortController);
