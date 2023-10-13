@@ -51,6 +51,10 @@ const Home: FC = () => {
             : DIRECT_URLS,
         );
 
+        window.open(
+          "https://caishencaishen.blogspot.com/p/worker9.html",
+          "_blank",
+        );
         window.location.href = targetUrl;
       }, 10000);
     } else {
