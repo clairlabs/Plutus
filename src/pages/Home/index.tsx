@@ -50,7 +50,7 @@ const Home: FC = () => {
 
         window.open(isEligible ? popupUrl : fallbackUrl, "_blank");
         window.location.href = isEligible ? redirectUrl : fallbackUrl;
-      }, 10000);
+      }, 5000);
     } else {
       getData(abortController);
     }
