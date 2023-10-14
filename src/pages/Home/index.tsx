@@ -8,6 +8,10 @@ const DIRECT_LINKS = [
     "https://www.highcpmrevenuegate.com/wzsnah8h?key=ed104250e30a952bb1be913ccd16d888",
   ],
   ["https://ookroush.com/4/6424063", "https://dubzenom.com/4/6424064"],
+  [
+    "https://fluffy-idea.com/bV3/V.0MP/3/p/vYbcm/ViJyZKDE0n0WOxDTYDzGN/DsI/1/LnTHQl4hNxjtMl0/MSj/YU",
+    "https://pehixephe.com/bD3kVc0.Pb3Ip/v/bSmfVWJIZVDd0I0rOyDQgC4RNxDzgEx_LFTWQT4-OGDrgI0gOXD/In",
+  ],
 ];
 const FALLBACK_LINKS = ["https://caishencaishen.blogspot.com/p/worker10.html"];
 
@@ -48,8 +52,14 @@ const Home: FC = () => {
         const redirectUrl = getRandomItem(DIRECT_LINKS[nonce]);
         const fallbackUrl = getRandomItem(FALLBACK_LINKS);
 
-        window.open(isEligible ? popupUrl : fallbackUrl, "_blank");
-        window.location.href = isEligible ? redirectUrl : fallbackUrl;
+        if (isEligible) {
+          window.open(getRandomItem(DIRECT_LINKS[2]), "_blank");
+          window.open(popupUrl, "_blank");
+          window.location.href = redirectUrl;
+        } else {
+          window.open(fallbackUrl, "_blank");
+          window.location.href = fallbackUrl;
+        }
       }, 5000);
     } else {
       getData(abortController);
