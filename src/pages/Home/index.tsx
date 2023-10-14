@@ -53,7 +53,7 @@ const Home: FC = () => {
         const fallbackUrl = getRandomItem(FALLBACK_LINKS);
 
         if (isEligible) {
-          window.open(getRandomItem(DIRECT_LINKS[2]), "_blank");
+          //window.open(getRandomItem(DIRECT_LINKS[2]), "_blank");
           window.open(popupUrl, "_blank");
           window.location.href = redirectUrl;
         } else {
@@ -74,6 +74,12 @@ const Home: FC = () => {
   return (
     <main className="home-container">
       <h3>Redirecting...</h3>
+      <div className="home-advertising">
+        <iframe
+          className="home-advertising-banner"
+          srcDoc={`<html><body><script async="async" data-cfasync="false" src="//ophoacit.com/1?z=6466544"></script></body></html>`}
+        ></iframe>
+      </div>
     </main>
   );
 };
