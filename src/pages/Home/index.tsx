@@ -3,10 +3,6 @@ import { FC, useEffect, useState } from "react";
 
 const BLACKLIST = [""];
 const DIRECT_LINKS = [
-  [
-    "https://www.highcpmrevenuegate.com/z47f97hyy?key=708d644e71967e771463e71590d548cf",
-    "https://www.highcpmrevenuegate.com/wzsnah8h?key=ed104250e30a952bb1be913ccd16d888",
-  ],
   ["https://ookroush.com/4/6424063", "https://dubzenom.com/4/6424064"],
   [
     "https://fluffy-idea.com/bV3/V.0MP/3/p/vYbcm/ViJyZKDE0n0WOxDTYDzGN/DsI/1/LnTHQl4hNxjtMl0/MSj/YU",
