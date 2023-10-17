@@ -3,11 +3,8 @@ import { FC, useEffect, useState } from "react";
 
 const BLACKLIST = [""];
 const DIRECT_LINKS = [
-  ["https://ookroush.com/4/6424063", "https://dubzenom.com/4/6424064"],
-  [
-    "https://fluffy-idea.com/bV3/V.0MP/3/p/vYbcm/ViJyZKDE0n0WOxDTYDzGN/DsI/1/LnTHQl4hNxjtMl0/MSj/YU",
-    "https://pehixephe.com/bD3kVc0.Pb3Ip/v/bSmfVWJIZVDd0I0rOyDQgC4RNxDzgEx_LFTWQT4-OGDrgI0gOXD/In",
-  ],
+  ["https://dubzenom.com/4/6424064"],
+  ["https://ookroush.com/4/6424063"],
 ];
 const FALLBACK_LINKS = ["https://caishencaishen.blogspot.com/p/worker10.html"];
 
